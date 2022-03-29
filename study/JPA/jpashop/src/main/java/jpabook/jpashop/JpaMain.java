@@ -1,4 +1,6 @@
-package hellojpa;
+package jpabook.jpashop;
+
+import jpabook.jpashop.domain.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,14 +17,11 @@ public class JpaMain {
         tx.begin();
 
         try{
-            List<Member> result = em.createQuery(
-                    "select m from Member m where m.username like '%kim%",
-                    Member.class
-            ).getResultList();
-
-            for (Member member : result) {
-                System.out.println("member = " + member);
-            }
+//            Book book = new Book();
+//            book.setName("JPA");
+//            book.setAuthor("김영한");
+//
+//            em.persist(book);
 
             tx.commit(); //트랜잭선 직전에 변경되는 사항있는지 확인하고 쿼리 생성후 날린후 commit(수정)
             //commit 시점에 쿼리 날라감
