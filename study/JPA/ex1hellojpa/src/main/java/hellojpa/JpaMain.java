@@ -15,18 +15,17 @@ public class JpaMain {
         tx.begin();
 
         try{
-            Member findMember = em.find(Member.class, 1L);
-
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .getResultList();
+            List<Member> result = em.createQuery(
+                    "select m from Member m where m.username like '%kim%",
+                    Member.class
+            ).getResultList();
 
             for (Member member : result) {
-                System.out.println("member.getName() = " + member.getName());
+                System.out.println("member = " + member);
             }
 
-            findMember.setName("HelloJPA");
-
             tx.commit(); //트랜잭선 직전에 변경되는 사항있는지 확인하고 쿼리 생성후 날린후 commit(수정)
+            //commit 시점에 쿼리 날라감
         }catch (Exception e){
             tx.rollback();
         } finally {
